@@ -1,0 +1,18 @@
+# STM32CubeIDE build output (regenerated on every build)
+Debug/
+Release/
+*.o
+*.d
+*.su
+*.cyclo
+*.elf
+*.map
+*.list
+*.bin
+*.hex
+
+# IDE / OS noise
+.metadata/
+*.launch
+.DS_Store
+Thumbs.db
