@@ -6,11 +6,10 @@ I did not have the hardware to flash and run these, so they are verified by a
 clean build in STM32CubeIDE rather than on a device. The serial output is 115200
 8N1 on all three tasks.
 
-
 Task 1
 
 This is the Wi-Fi task. I used the option where the STM32 is the main controller
-and the ESP32 is used only as a Wi-Fi modem. The ESP32 runs Espressif's ready-made
+and the ESP32 is used only as a Wi-Fi modem. The ESP32 runs ready-made
 ESP-AT firmware, and my STM32 code controls it over UART by sending plain AT
 commands, so there is no code running on the ESP32 that I wrote. When the board
 starts, it shows a small menu on the serial console and asks for the Wi-Fi name,
@@ -19,7 +18,6 @@ Wi-Fi using CWMODE and CWJAP, connects to the MQTT broker, and sends a small
 heartbeat message every 30 seconds so the server knows it is alive. At the same
 time it keeps listening on the UART for any command coming back from the cloud,
 using an interrupt so it never misses anything. The main file is esp_modem.c.
-
 
 Task 2
 
@@ -30,7 +28,6 @@ smoothed value is then printed over UART at 115200 in a readable line, together
 with the raw value and the voltage in millivolts. The moving average keeps a
 running total so it stays fast, and the ADC and UART calls are checked for errors.
 The main file is adc_stream.c.
-
 
 Task 3
 
@@ -56,6 +53,3 @@ pins (SWDIO to PA13, SWCLK to PA14, plus ground and 3.3V). In CubeIDE press Run 
 flash over the ST-Link, then open a serial terminal at 115200 to see the output.
 For task 1 you also need an ESP32 with ESP-AT firmware connected to USART1.
 
-The clock is set for an 8 MHz crystal giving 72 MHz. Task 1 keeps the Wi-Fi
-details in memory for the session (you type them in each boot) to keep it simple;
-they could also be saved to flash.
